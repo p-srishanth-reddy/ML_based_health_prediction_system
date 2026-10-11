@@ -1,0 +1,58 @@
+{
+    "module_id": "anemia",
+    "target_mapping": {
+        "0": 0,
+        "1": 1
+    },
+    "features": [
+        "Gender",
+        "Hemoglobin",
+        "MCH",
+        "MCHC",
+        "MCV"
+    ],
+    "evaluation": {
+        "decision_tree": {
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "roc_auc": 1.0,
+            "confusion_matrix": [
+                [
+                    161,
+                    0
+                ],
+                [
+                    0,
+                    124
+                ]
+            ]
+        },
+        "random_forest": {
+            "accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "f1_score": 1.0,
+            "roc_auc": 1.0,
+            "confusion_matrix": [
+                [
+                    161,
+                    0
+                ],
+                [
+                    0,
+                    124
+                ]
+            ]
+        }
+    },
+    "saved_models": {
+        "decision_tree": "models/anemia/decision_tree.joblib",
+        "random_forest": "models/anemia/random_forest.joblib"
+    },
+    "classes": [
+        "0",
+        "1"
+    ]
+}

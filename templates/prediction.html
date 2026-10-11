@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Screening - {{ module_id }}{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm rounded-4 overflow-hidden">
+            <div class="card-header bg-navy text-white p-4">
+                <h3 class="mb-0" id="module-name">Loading...</h3>
+                <p class="mb-0 opacity-75" id="module-desc"></p>
+            </div>
+            <div class="card-body p-4">
+                <form id="prediction-form" class="row g-3">
+                    <!-- Form fields will be injected here by JavaScript -->
+                </form>
+                <div class="mt-4 d-flex gap-2">
+                    <button type="button" id="btn-predict" class="btn btn-primary px-4">Predict Risk</button>
+                    <button type="reset" class="btn btn-outline-secondary px-4">Reset</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="result-panel" class="mt-4 d-none">
+            <div class="card border-primary shadow-sm rounded-4">
+                <div class="card-body p-4">
+                    <h4 class="text-primary mb-3">Prediction Result</h4>
+                    <div id="prediction-content" class="mb-4">
+                        <!-- Results will be injected here -->
+                    </div>
+                    <div class="alert alert-info py-2 small">
+                        <i class="bi bi-info-circle me-2"></i>This score represents the model's estimated probability, not a medical diagnosis.
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button onclick="location.reload()" class="btn btn-sm btn-outline-primary">Try Again</button>
+                        <a href="/" class="btn btn-sm btn-outline-secondary">Back to Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Pass module_id to the global JS
+    window.currentModuleId = "{{ module_id }}";
+</script>
+{% endblock %}

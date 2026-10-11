@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Home - HealthAI Analytics{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-4 fw-bold text-navy">AI-Based Early Prediction of Health Diseases</h1>
+    <p class="lead text-muted mx-auto" style="max-width: 800px;">
+        A clinical data analytics prototype using Machine Learning to identify early risks of common health conditions.
+        This is an academic demonstration for educational purposes.
+    </p>
+    <div class="mt-4">
+        <a href="#modules" class="btn btn-primary btn-lg px-4 me-md-2">Explore Predictions</a>
+        <a href="/evaluation" class="btn btn-outline-secondary btn-lg px-4">View Model Performance</a>
+    </div>
+</div>
+
+<div id="modules" class="row g-4 mb-5">
+    <!-- Cards will be injected here by JavaScript -->
+</div>
+
+<div class="bg-light p-5 rounded-4 mb-5">
+    <h3 class="text-center mb-4">Project Methodology</h3>
+    <div class="row g-4">
+        <div class="col-md-6">
+            <h5><i class="bi bi-diagram-3 me-2 text-primary"></i>Decision Tree</h5>
+            <p>A non-parametric supervised learning method used for classification. It splits the data into branches based on feature values, creating a tree-like model of decisions.</p>
+        </div>
+        <div class="col-md-6">
+            <h5><i class="bi bi-layers me-2 text-primary"></i>Random Forest</h5>
+            <p>An ensemble learning method that constructs a multitude of decision trees at training time and outputs the class that is the mode of the classes of the individual trees.</p>
+        </div>
+    </div>
+</div>
+
+<div class="alert alert-warning text-center rounded-4" role="alert">
+    <strong>Disclaimer:</strong> This application is an academic prototype. It is NOT a diagnostic tool and should NOT be used for medical decisions. Always consult a licensed healthcare professional.
+</div>
+{% endblock %}

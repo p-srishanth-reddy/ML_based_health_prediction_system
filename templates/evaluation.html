@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}Model Evaluation - HealthAI{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h2 class="fw-bold text-navy">Model Evaluation Dashboard</h2>
+    <p class="text-muted">Compare performance metrics between Decision Tree and Random Forest classifiers.</p>
+</div>
+
+<div class="row justify-content-center mb-4">
+    <div class="col-md-6">
+        <select id="module-select" class="form-select form-select-lg rounded-pill">
+            <option value="">Select a Condition to Evaluate...</option>
+        </select>
+    </div>
+</div>
+
+<div id="evaluation-content" class="d-none">
+    <div class="row g-4">
+        <div class="col-md-4">
+            <div class="card h-100 shadow-sm rounded-4 p-3 text-center">
+                <h6 class="text-muted mb-3">Dataset Information</h6>
+                <div id="dataset-info" class="small"></div>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <div class="card h-100 shadow-sm rounded-4 p-4">
+                <h5 class="mb-4">Performance Metrics</h5>
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Metric</th>
+                                <th>Decision Tree</th>
+                                <th>Random Forest</th>
+                            </tr>
+                        </thead>
+                        <tbody id="metrics-body">
+                            <!-- Metrics injected here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="empty-state" class="text-center py-5">
+    <i class="bi bi-graph-up-arrow display-1 text-light"></i>
+    <p class="text-muted mt-3">Please select a health condition to view its evaluation report.</p>
+</div>
+{% endblock %}

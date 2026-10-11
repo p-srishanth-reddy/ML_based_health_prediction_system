@@ -1,0 +1,59 @@
+{
+    "module_id": "blood_pressure",
+    "target_mapping": {
+        "0": 0,
+        "1": 1
+    },
+    "features": [
+        "Age",
+        "Sex",
+        "BMI",
+        "Level_of_Hemoglobin",
+        "Genetic_Pedigree_Coefficient",
+        "Chronic_kidney_disease"
+    ],
+    "evaluation": {
+        "decision_tree": {
+            "accuracy": 0.8175,
+            "precision": 0.8409060329861111,
+            "recall": 0.8175,
+            "f1_score": 0.8138539410550796,
+            "roc_auc": 0.8644069915731041,
+            "confusion_matrix": [
+                [
+                    193,
+                    10
+                ],
+                [
+                    63,
+                    134
+                ]
+            ]
+        },
+        "random_forest": {
+            "accuracy": 0.8175,
+            "precision": 0.8175216271627161,
+            "recall": 0.8175,
+            "f1_score": 0.8175057040162526,
+            "roc_auc": 0.902628091320547,
+            "confusion_matrix": [
+                [
+                    166,
+                    37
+                ],
+                [
+                    36,
+                    161
+                ]
+            ]
+        }
+    },
+    "saved_models": {
+        "decision_tree": "models/blood_pressure/decision_tree.joblib",
+        "random_forest": "models/blood_pressure/random_forest.joblib"
+    },
+    "classes": [
+        "0",
+        "1"
+    ]
+}

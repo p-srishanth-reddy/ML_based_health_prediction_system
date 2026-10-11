@@ -1,0 +1,57 @@
+{
+    "module_id": "diabetes",
+    "target_mapping": {
+        "0": 0,
+        "1": 1
+    },
+    "features": [
+        "bmi",
+        "HbA1c_level",
+        "blood_glucose_level",
+        "age"
+    ],
+    "evaluation": {
+        "decision_tree": {
+            "accuracy": 0.80145,
+            "precision": 0.9323968588981596,
+            "recall": 0.80145,
+            "f1_score": 0.8421423110266609,
+            "roc_auc": 0.9455507071681132,
+            "confusion_matrix": [
+                [
+                    14446,
+                    3854
+                ],
+                [
+                    117,
+                    1583
+                ]
+            ]
+        },
+        "random_forest": {
+            "accuracy": 0.8732,
+            "precision": 0.9411406431600084,
+            "recall": 0.8732,
+            "f1_score": 0.8944185422355418,
+            "roc_auc": 0.9724638540662167,
+            "confusion_matrix": [
+                [
+                    15894,
+                    2406
+                ],
+                [
+                    130,
+                    1570
+                ]
+            ]
+        }
+    },
+    "saved_models": {
+        "decision_tree": "models/diabetes/decision_tree.joblib",
+        "random_forest": "models/diabetes/random_forest.joblib"
+    },
+    "classes": [
+        "0",
+        "1"
+    ]
+}

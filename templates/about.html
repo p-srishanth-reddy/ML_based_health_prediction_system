@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}About - HealthAI Analytics{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="card shadow-sm rounded-4 p-5">
+            <h2 class="text-navy fw-bold mb-4">About This Project</h2>
+            <p>This project, <strong>“AI-Based Early Prediction of Health Diseases Using Clinical Data Analytics,”</strong> is designed as an academic demonstration of how machine learning can be applied to public health datasets for risk screening.</p>
+
+            <h5 class="mt-4">Our Approach</h5>
+            <p>We utilize clinical datasets from Kaggle and implement two distinct classification algorithms: Decision Trees and Random Forests. By preprocessing the data and tuning hyperparameters, we compare which model provides better accuracy and reliability for each condition.</p>
+
+            <h5 class="mt-4">Technical Stack</h5>
+            <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>Backend:</strong> Python, Flask</li>
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>ML:</strong> Scikit-Learn, Pandas, NumPy</li>
+                <li><i class="bi bi-check-circle-fill text-primary me-2"></i><strong>Frontend:</strong> HTML5, CSS3, Bootstrap 5, JavaScript</li>
+            </ul>
+
+            <div class="alert alert-warning mt-5">
+                <strong>Important:</strong> This is NOT a clinical tool. The results provided are based on statistical patterns in data and are intended for educational purposes only.
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
