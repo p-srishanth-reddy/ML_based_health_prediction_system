@@ -7,50 +7,57 @@ from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from src.data_loader import DataLoader
 
 class Preprocessor:
-    """Builds preprocessing pipelines for different health modules."""
+    """Builds robust preprocessing pipelines for each health prediction module."""
+
+    MODULE_COLUMNS = {
+        'blood_pressure': {
+            'num_cols': ['Age', 'BMI', 'Level_of_Hemoglobin', 'Genetic_Pedigree_Coefficient'],
+            'cat_cols': ['Sex', 'Chronic_kidney_disease']
+        },
+        'diabetes': {
+            'num_cols': ['bmi', 'HbA1c_level', 'blood_glucose_level', 'age'],
+            'cat_cols': []
+        },
+        'anemia': {
+            'num_cols': ['Hemoglobin', 'MCH', 'MCHC', 'MCV'],
+            'cat_cols': ['Gender']
+        },
+        'obesity': {
+            'num_cols': ['Age', 'Height', 'Weight'],
+            'cat_cols': ['Gender', 'family_history_with_overweight', 'FAVC', 'MTRANS']
+        }
+    }
 
     @staticmethod
     def get_pipeline(module_id):
-        """Returns a fitted preprocessing pipeline for the given module."""
-        config = DataLoader.DATA_CONFIG[module_id]
-        target = config['target']
-        features = [col for col in config['expected_cols'] if col != target]
+        """Returns an unfitted ColumnTransformer and the ordered list of input features."""
+        if module_id not in Preprocessor.MODULE_COLUMNS:
+            raise ValueError(f"Unknown module ID: {module_id}")
 
-        # Identify numerical and categorical columns
-        # In a real scenario, we would inspect the loaded data.
-        # Here we use reasonable defaults based on documentation.
+        cols = Preprocessor.MODULE_COLUMNS[module_id]
+        num_cols = cols['num_cols']
+        cat_cols = cols['cat_cols']
+        features = num_cols + cat_cols
 
-        num_cols = []
-        cat_cols = []
-
-        if module_id == 'blood_pressure':
-            cat_cols = ['Sex']
-            num_cols = ['Age', 'BMI', 'Level_of_Hemoglobin', 'Genetic_Pedigree_Coefficient', 'Chronic_kidney_disease']
-        elif module_id == 'diabetes':
-            num_cols = ['bmi', 'HbA1c_level', 'blood_glucose_level', 'age']
-        elif module_id == 'anemia':
-            cat_cols = ['Gender']
-            num_cols = ['Hemoglobin', 'MCH', 'MCHC', 'MCV']
-        elif module_id == 'obesity':
-            cat_cols = ['Gender', 'family_history_with_overweight', 'FAVC', 'MTRANS']
-            num_cols = ['Age', 'Height', 'Weight']
-
-        # Numerical pipeline: Impute missing with median
+        # Numerical pipeline: Median imputation + Standard Scaling
         num_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='median'))
+            ('imputer', SimpleImputer(strategy='median')),
+            ('scaler', StandardScaler())
         ])
 
-        # Categorical pipeline: Impute missing with most frequent and OneHot encode
-        cat_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='most_frequent')),
-            ('onehot', OneHotEncoder(handle_unknown='ignore'))
-        ])
+        transformers = [('num', num_transformer, num_cols)]
+
+        # Categorical pipeline: Most-frequent imputation + One-Hot Encoding
+        if cat_cols:
+            cat_transformer = Pipeline(steps=[
+                ('imputer', SimpleImputer(strategy='most_frequent')),
+                ('onehot', OneHotEncoder(handle_unknown='ignore', sparse_output=False))
+            ])
+            transformers.append(('cat', cat_transformer, cat_cols))
 
         preprocessor = ColumnTransformer(
-            transformers=[
-                ('num', num_transformer, num_cols),
-                ('cat', cat_transformer, cat_cols)
-            ]
+            transformers=transformers,
+            remainder='drop'
         )
 
         return preprocessor, features

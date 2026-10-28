@@ -1,45 +1,93 @@
 {% extends "base.html" %}
 
-{% block title %}Model Evaluation - HealthAI{% endblock %}
+{% block title %}Comparative Model Evaluation - HealthAI Analytics{% endblock %}
 
 {% block content %}
 <div class="text-center mb-5">
-    <h2 class="fw-bold text-navy">Model Evaluation Dashboard</h2>
-    <p class="text-muted">Compare performance metrics between Decision Tree and Random Forest classifiers.</p>
+    <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-primary-subtle text-primary small fw-semibold mb-3">
+        <i class="bi bi-graph-up"></i> Verified Test-Set Evaluation
+    </div>
+    <h2 class="fw-bold text-navy">Clinical Model Evaluation Dashboard</h2>
+    <p class="text-muted mx-auto" style="max-width: 700px;">
+        Compare actual measured metrics across Logistic Regression, Decision Tree, and Random Forest classifiers on strictly held-out test data (80/20 stratified split, duplicate-free).
+    </p>
 </div>
 
-<div class="row justify-content-center mb-4">
-    <div class="col-md-6">
-        <select id="module-select" class="form-select form-select-lg rounded-pill">
-            <option value="">Select a Condition to Evaluate...</option>
+<div class="row justify-content-center mb-5">
+    <div class="col-md-7 col-lg-5">
+        <label class="form-label small fw-bold text-muted text-uppercase mb-2">Select Condition Module</label>
+        <select id="module-select" class="form-select form-select-lg rounded-pill shadow-sm border-primary">
+            <option value="">Select a Health Condition to Evaluate...</option>
         </select>
     </div>
 </div>
 
 <div id="evaluation-content" class="d-none">
-    <div class="row g-4">
-        <div class="col-md-4">
-            <div class="card h-100 shadow-sm rounded-4 p-3 text-center">
-                <h6 class="text-muted mb-3">Dataset Information</h6>
-                <div id="dataset-info" class="small"></div>
+    <!-- Top Summary Row: Primary Model & Dataset Health -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-4">
+            <div class="card h-100 shadow-sm rounded-4 p-4 border">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h6 class="fw-bold text-navy mb-0">Dataset & Splitting</h6>
+                    <span class="badge bg-success-subtle text-success border border-success-subtle rounded-pill small">Leakage-Safe</span>
+                </div>
+                <div id="dataset-info">
+                    <!-- Injected by JavaScript -->
+                </div>
             </div>
         </div>
-        <div class="col-md-8">
-            <div class="card h-100 shadow-sm rounded-4 p-4">
-                <h5 class="mb-4">Performance Metrics</h5>
+
+        <div class="col-lg-8">
+            <div class="card h-100 shadow-sm rounded-4 p-4 border">
+                <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                    <div>
+                        <h6 class="fw-bold text-navy mb-0">Algorithm Comparison Matrix</h6>
+                        <small class="text-muted">Measured on held-out test partition (Stratified 20%)</small>
+                    </div>
+                    <span id="best-model-badge" class="badge bg-primary px-3 py-2 rounded-pill small"></span>
+                </div>
                 <div class="table-responsive">
-                    <table class="table table-hover align-middle">
+                    <table class="table table-hover align-middle mb-0">
                         <thead class="table-light">
                             <tr>
-                                <th>Metric</th>
-                                <th>Decision Tree</th>
-                                <th>Random Forest</th>
+                                <th class="text-secondary small text-uppercase">Evaluation Metric</th>
+                                <th class="text-secondary small text-uppercase">Logistic Regression</th>
+                                <th class="text-secondary small text-uppercase">Decision Tree</th>
+                                <th class="text-secondary small text-uppercase">Random Forest</th>
                             </tr>
                         </thead>
                         <tbody id="metrics-body">
-                            <!-- Metrics injected here -->
+                            <!-- Injected by JavaScript -->
                         </tbody>
                     </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secondary Row: Confusion Matrix & Top Feature Influences -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm rounded-4 p-4 border">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h6 class="fw-bold text-navy mb-0">Test-Set Confusion Matrix</h6>
+                    <small class="text-muted" id="cm-model-title">Selected Model</small>
+                </div>
+                <div id="confusion-matrix-container" class="py-2">
+                    <!-- Matrix rendered by JavaScript -->
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card h-100 shadow-sm rounded-4 p-4 border">
+                <div class="d-flex align-items-center justify-content-between mb-3">
+                    <h6 class="fw-bold text-navy mb-0">Top Predictive Features</h6>
+                    <span class="badge bg-light text-secondary border rounded-pill small">Feature Importance</span>
+                </div>
+                <p class="small text-muted mb-3">Relative statistical weight of features learned during training.</p>
+                <div id="features-importance-container">
+                    <!-- Features rendered by JavaScript -->
                 </div>
             </div>
         </div>
@@ -47,7 +95,12 @@
 </div>
 
 <div id="empty-state" class="text-center py-5">
-    <i class="bi bi-graph-up-arrow display-1 text-light"></i>
-    <p class="text-muted mt-3">Please select a health condition to view its evaluation report.</p>
+    <div class="bg-light d-inline-flex p-4 rounded-circle mb-3">
+        <i class="bi bi-bar-chart-steps display-4 text-primary opacity-50"></i>
+    </div>
+    <h5 class="fw-bold text-navy">No Condition Selected</h5>
+    <p class="text-muted small mx-auto" style="max-width: 450px;">
+        Choose one of the four health conditions above to inspect its measured accuracy, precision, recall, specificity, and confusion matrix.
+    </p>
 </div>
 {% endblock %}

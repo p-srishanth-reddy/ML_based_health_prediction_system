@@ -1,39 +1,110 @@
 {% extends "base.html" %}
 
-{% block title %}Screening - {{ module_id }}{% endblock %}
+{% block title %}Screening: {{ module_id.replace('_', ' ') | title }} - HealthAI Analytics{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-lg-8">
-        <div class="card shadow-sm rounded-4 overflow-hidden">
+    <div class="col-lg-9">
+        <!-- Breadcrumb & Back -->
+        <div class="mb-3 d-flex align-items-center justify-content-between">
+            <a href="/" class="btn btn-sm btn-outline-secondary rounded-pill px-3">
+                <i class="bi bi-arrow-left me-1"></i>Back to Modules
+            </a>
+            <span class="badge bg-secondary-subtle text-secondary px-3 py-2 rounded-pill small">
+                Module ID: {{ module_id }}
+            </span>
+        </div>
+
+        <!-- Form Card -->
+        <div class="card shadow-sm rounded-4 overflow-hidden mb-4 border">
             <div class="card-header bg-navy text-white p-4">
-                <h3 class="mb-0" id="module-name">Loading...</h3>
-                <p class="mb-0 opacity-75" id="module-desc"></p>
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div>
+                        <span class="badge bg-light text-navy fw-semibold px-2 py-1 mb-2" id="module-category">Screening</span>
+                        <h3 class="mb-1 fw-bold text-white" id="module-name">Loading Screening Module...</h3>
+                        <p class="mb-0 text-white-50 small" id="module-desc"></p>
+                    </div>
+                    <!-- Quick Sample Loader Buttons -->
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" id="btn-sample-normal" title="Populate form with healthy reference values">
+                            <i class="bi bi-check2-circle me-1"></i>Load Normal Sample
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-light rounded-pill px-3" id="btn-sample-elevated" title="Populate form with elevated risk values">
+                            <i class="bi bi-exclamation-triangle me-1"></i>Load Elevated Sample
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="card-body p-4">
-                <form id="prediction-form" class="row g-3">
-                    <!-- Form fields will be injected here by JavaScript -->
+
+            <div class="card-body p-4 p-md-5">
+                <!-- Validation Error Alert Box -->
+                <div id="validation-alert" class="alert alert-danger d-none rounded-3 mb-4" role="alert">
+                    <h6 class="fw-bold mb-1"><i class="bi bi-exclamation-circle-fill me-2"></i>Validation Error</h6>
+                    <ul class="mb-0 ps-3 small" id="validation-errors-list"></ul>
+                </div>
+
+                <form id="prediction-form" class="row g-4" novalidate>
+                    <!-- Form fields dynamically rendered by JS with units and limits -->
+                    <div class="text-center py-4 text-muted">
+                        <div class="spinner-border spinner-border-sm text-primary me-2" role="status"></div>
+                        <span>Loading clinical schema fields...</span>
+                    </div>
                 </form>
-                <div class="mt-4 d-flex gap-2">
-                    <button type="button" id="btn-predict" class="btn btn-primary px-4">Predict Risk</button>
-                    <button type="reset" class="btn btn-outline-secondary px-4">Reset</button>
+
+                <div class="mt-4 pt-3 border-top d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div class="d-flex gap-2">
+                        <button type="button" id="btn-predict" class="btn btn-primary px-4 py-2 rounded-pill shadow-sm">
+                            <i class="bi bi-cpu me-2"></i>Run Multi-Model Risk Screening
+                        </button>
+                        <button type="reset" id="btn-reset" class="btn btn-outline-secondary px-4 py-2 rounded-pill">
+                            <i class="bi bi-arrow-counterclockwise me-1"></i>Reset
+                        </button>
+                    </div>
+                    <span class="text-muted small">
+                        <i class="bi bi-shield-check text-success me-1"></i>Client-side confidential
+                    </span>
                 </div>
             </div>
         </div>
 
+        <!-- Result Panel -->
         <div id="result-panel" class="mt-4 d-none">
-            <div class="card border-primary shadow-sm rounded-4">
-                <div class="card-body p-4">
-                    <h4 class="text-primary mb-3">Prediction Result</h4>
-                    <div id="prediction-content" class="mb-4">
-                        <!-- Results will be injected here -->
+            <div class="card shadow-sm rounded-4 overflow-hidden border">
+                <div class="card-header bg-light p-4 border-bottom d-flex align-items-center justify-content-between flex-wrap gap-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="bi bi-file-earmark-medical-fill text-primary fs-4"></i>
+                        <div>
+                            <h4 class="mb-0 fw-bold text-navy">Screening Risk Assessment</h4>
+                            <small class="text-muted">Multi-model algorithmic consensus & patient feature influence</small>
+                        </div>
                     </div>
-                    <div class="alert alert-info py-2 small">
-                        <i class="bi bi-info-circle me-2"></i>This score represents the model's estimated probability, not a medical diagnosis.
+                    <div id="result-badge-container"></div>
+                </div>
+
+                <div class="card-body p-4 p-md-5">
+                    <div id="prediction-content">
+                        <!-- Populated by JavaScript showResult() -->
                     </div>
-                    <div class="d-flex gap-2">
-                        <button onclick="location.reload()" class="btn btn-sm btn-outline-primary">Try Again</button>
-                        <a href="/" class="btn btn-sm btn-outline-secondary">Back to Home</a>
+
+                    <!-- Medical Disclaimer Callout -->
+                    <div class="alert alert-warning border-0 rounded-3 mt-4 mb-3 p-3">
+                        <div class="d-flex gap-2">
+                            <i class="bi bi-info-circle-fill text-warning fs-5 flex-shrink-0"></i>
+                            <div class="small">
+                                <strong>Academic Demonstration Notice:</strong>
+                                This screening probability is an uncalibrated machine learning score derived from historical datasets.
+                                It does NOT constitute a medical diagnosis, physiological causation, or definitive health status. Consult a board-certified physician for clinical evaluation.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 pt-2">
+                        <button onclick="document.getElementById('prediction-form').scrollIntoView({behavior: 'smooth'})" class="btn btn-outline-primary rounded-pill px-4">
+                            <i class="bi bi-pencil-square me-1"></i>Adjust Inputs
+                        </button>
+                        <a href="/evaluation" class="btn btn-outline-secondary rounded-pill px-4">
+                            <i class="bi bi-bar-chart-line me-1"></i>Inspect Model Performance
+                        </a>
                     </div>
                 </div>
             </div>
@@ -42,7 +113,6 @@
 </div>
 
 <script>
-    // Pass module_id to the global JS
     window.currentModuleId = "{{ module_id }}";
 </script>
 {% endblock %}

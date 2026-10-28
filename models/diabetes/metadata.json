@@ -1,5 +1,6 @@
 {
     "module_id": "diabetes",
+    "primary_model": "logistic_regression",
     "target_mapping": {
         "0": 0,
         "1": 1
@@ -10,48 +11,143 @@
         "blood_glucose_level",
         "age"
     ],
+    "classes": [
+        "0",
+        "1"
+    ],
     "evaluation": {
-        "decision_tree": {
-            "accuracy": 0.80145,
-            "precision": 0.9323968588981596,
-            "recall": 0.80145,
-            "f1_score": 0.8421423110266609,
-            "roc_auc": 0.9455507071681132,
+        "logistic_regression": {
+            "accuracy": 0.8773,
+            "balanced_accuracy": 0.8754,
+            "precision": 0.9353,
+            "recall": 0.8773,
+            "specificity": 0.8777,
+            "f1_score": 0.896,
+            "roc_auc": 0.958,
+            "pr_auc": 0.8117,
+            "cv_f1_mean": 0.898,
             "confusion_matrix": [
                 [
-                    14446,
-                    3854
+                    15389,
+                    2145
                 ],
                 [
-                    117,
-                    1583
+                    215,
+                    1481
+                ]
+            ]
+        },
+        "decision_tree": {
+            "accuracy": 0.757,
+            "balanced_accuracy": 0.8436,
+            "precision": 0.9286,
+            "recall": 0.757,
+            "specificity": 0.7385,
+            "f1_score": 0.8084,
+            "roc_auc": 0.9427,
+            "pr_auc": 0.7556,
+            "cv_f1_mean": 0.8269,
+            "confusion_matrix": [
+                [
+                    12948,
+                    4586
+                ],
+                [
+                    87,
+                    1609
                 ]
             ]
         },
         "random_forest": {
-            "accuracy": 0.8732,
-            "precision": 0.9411406431600084,
-            "recall": 0.8732,
-            "f1_score": 0.8944185422355418,
-            "roc_auc": 0.9724638540662167,
+            "accuracy": 0.8678,
+            "balanced_accuracy": 0.8942,
+            "precision": 0.9391,
+            "recall": 0.8678,
+            "specificity": 0.8621,
+            "f1_score": 0.8898,
+            "roc_auc": 0.9722,
+            "pr_auc": 0.8669,
+            "cv_f1_mean": 0.8951,
             "confusion_matrix": [
                 [
-                    15894,
-                    2406
+                    15116,
+                    2418
                 ],
                 [
-                    130,
-                    1570
+                    125,
+                    1571
                 ]
             ]
         }
     },
     "saved_models": {
+        "logistic_regression": "models/diabetes/logistic_regression.joblib",
         "decision_tree": "models/diabetes/decision_tree.joblib",
         "random_forest": "models/diabetes/random_forest.joblib"
     },
-    "classes": [
-        "0",
-        "1"
-    ]
+    "feature_importance": {
+        "logistic_regression": [
+            [
+                "HbA1c_level",
+                0.4152
+            ],
+            [
+                "blood_glucose_level",
+                0.2327
+            ],
+            [
+                "age",
+                0.2327
+            ],
+            [
+                "bmi",
+                0.1194
+            ]
+        ],
+        "decision_tree": [
+            [
+                "HbA1c_level",
+                0.5688
+            ],
+            [
+                "blood_glucose_level",
+                0.3165
+            ],
+            [
+                "age",
+                0.1147
+            ],
+            [
+                "bmi",
+                0.0
+            ]
+        ],
+        "random_forest": [
+            [
+                "HbA1c_level",
+                0.4914
+            ],
+            [
+                "blood_glucose_level",
+                0.3241
+            ],
+            [
+                "age",
+                0.1515
+            ],
+            [
+                "bmi",
+                0.033
+            ]
+        ]
+    },
+    "dataset_info": {
+        "total_samples": 96146,
+        "train_samples": 76916,
+        "test_samples": 19230,
+        "class_distribution": {
+            "0": 87664,
+            "1": 8482
+        }
+    }
 }

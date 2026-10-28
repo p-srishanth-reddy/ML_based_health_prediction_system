@@ -1,58 +1,178 @@
 {
     "module_id": "anemia",
+    "primary_model": "decision_tree",
     "target_mapping": {
         "0": 0,
         "1": 1
     },
     "features": [
-        "Gender",
         "Hemoglobin",
         "MCH",
         "MCHC",
-        "MCV"
+        "MCV",
+        "Gender"
+    ],
+    "classes": [
+        "0",
+        "1"
     ],
     "evaluation": {
-        "decision_tree": {
-            "accuracy": 1.0,
-            "precision": 1.0,
-            "recall": 1.0,
-            "f1_score": 1.0,
+        "logistic_regression": {
+            "accuracy": 0.972,
+            "balanced_accuracy": 0.9741,
+            "precision": 0.9736,
+            "recall": 0.972,
+            "specificity": 0.9483,
+            "f1_score": 0.972,
             "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "cv_f1_mean": 0.9813,
             "confusion_matrix": [
                 [
-                    161,
+                    55,
+                    3
+                ],
+                [
+                    0,
+                    49
+                ]
+            ]
+        },
+        "decision_tree": {
+            "accuracy": 1.0,
+            "balanced_accuracy": 1.0,
+            "precision": 1.0,
+            "recall": 1.0,
+            "specificity": 1.0,
+            "f1_score": 1.0,
+            "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "cv_f1_mean": 0.993,
+            "confusion_matrix": [
+                [
+                    58,
                     0
                 ],
                 [
                     0,
-                    124
+                    49
                 ]
             ]
         },
         "random_forest": {
             "accuracy": 1.0,
+            "balanced_accuracy": 1.0,
             "precision": 1.0,
             "recall": 1.0,
+            "specificity": 1.0,
             "f1_score": 1.0,
             "roc_auc": 1.0,
+            "pr_auc": 1.0,
+            "cv_f1_mean": 0.9977,
             "confusion_matrix": [
                 [
-                    161,
+                    58,
                     0
                 ],
                 [
                     0,
-                    124
+                    49
                 ]
             ]
         }
     },
     "saved_models": {
+        "logistic_regression": "models/anemia/logistic_regression.joblib",
         "decision_tree": "models/anemia/decision_tree.joblib",
         "random_forest": "models/anemia/random_forest.joblib"
     },
-    "classes": [
-        "0",
-        "1"
-    ]
+    "feature_importance": {
+        "logistic_regression": [
+            [
+                "Hemoglobin",
+                0.5736
+            ],
+            [
+                "Gender_Female",
+                0.2022
+            ],
+            [
+                "Gender_Male",
+                0.2018
+            ],
+            [
+                "MCH",
+                0.0127
+            ],
+            [
+                "MCV",
+                0.0063
+            ],
+            [
+                "MCHC",
+                0.0033
+            ]
+        ],
+        "decision_tree": [
+            [
+                "Hemoglobin",
+                0.7684
+            ],
+            [
+                "Gender_Female",
+                0.2316
+            ],
+            [
+                "MCH",
+                0.0
+            ],
+            [
+                "MCHC",
+                0.0
+            ],
+            [
+                "MCV",
+                0.0
+            ],
+            [
+                "Gender_Male",
+                0.0
+            ]
+        ],
+        "random_forest": [
+            [
+                "Hemoglobin",
+                0.8431
+            ],
+            [
+                "Gender_Female",
+                0.0487
+            ],
+            [
+                "MCV",
+                0.0332
+            ],
+            [
+                "MCH",
+                0.0275
+            ],
+            [
+                "Gender_Male",
+                0.0275
+            ],
+            [
+                "MCHC",
+                0.02
+            ]
+        ]
+    },
+    "dataset_info": {
+        "total_samples": 534,
+        "train_samples": 427,
+        "test_samples": 107,
+        "class_distribution": {
+            "0": 287,
+            "1": 247
+        }
+    }
 }

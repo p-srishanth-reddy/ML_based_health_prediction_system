@@ -1,0 +1,20 @@
+[
+  "tests/test_ml_pipeline.py::test_data_loader_categorical_mapping",
+  "tests/test_ml_pipeline.py::test_data_loader_deduplication",
+  "tests/test_ml_pipeline.py::test_predictor_multi_model_structure",
+  "tests/test_ml_pipeline.py::test_preprocessor_pipeline_structure",
+  "tests/test_routes.py::test_about_page",
+  "tests/test_routes.py::test_api_modules",
+  "tests/test_routes.py::test_evaluation_api",
+  "tests/test_routes.py::test_evaluation_page",
+  "tests/test_routes.py::test_history_api",
+  "tests/test_routes.py::test_home_page",
+  "tests/test_routes.py::test_input_range_validation_failure",
+  "tests/test_routes.py::test_invalid_module_schema",
+  "tests/test_routes.py::test_module_schema",
+  "tests/test_routes.py::test_prediction_no_model",
+  "tests/test_routes.py::test_prediction_pages",
+  "tests/test_routes.py::test_valid_anemia_prediction",
+  "tests/test_routes.py::test_valid_diabetes_prediction",
+  "tests/test_routes.py::test_valid_obesity_prediction"
+]

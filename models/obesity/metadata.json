@@ -1,5 +1,6 @@
 {
     "module_id": "obesity",
+    "primary_model": "logistic_regression",
     "target_mapping": {
         "Insufficient_Weight": 0,
         "Normal_Weight": 1,
@@ -10,173 +11,14 @@
         "Overweight_Level_II": 6
     },
     "features": [
-        "Gender",
         "Age",
         "Height",
         "Weight",
+        "Gender",
         "family_history_with_overweight",
         "FAVC",
-        "FCVC",
-        "NCP",
-        "CAEC",
-        "SMOKE",
-        "CH2O",
-        "SCC",
-        "FAF",
-        "TUE",
-        "CALC",
         "MTRANS"
     ],
-    "evaluation": {
-        "decision_tree": {
-            "accuracy": 0.7730496453900709,
-            "precision": 0.7811716550466076,
-            "recall": 0.7730496453900709,
-            "f1_score": 0.7747700672893173,
-            "roc_auc": 0.948671996988806,
-            "confusion_matrix": [
-                [
-                    48,
-                    6,
-                    0,
-                    0,
-                    0,
-                    0,
-                    0
-                ],
-                [
-                    3,
-                    37,
-                    0,
-                    0,
-                    0,
-                    16,
-                    2
-                ],
-                [
-                    0,
-                    0,
-                    47,
-                    7,
-                    0,
-                    2,
-                    14
-                ],
-                [
-                    0,
-                    0,
-                    4,
-                    55,
-                    0,
-                    0,
-                    1
-                ],
-                [
-                    0,
-                    0,
-                    1,
-                    0,
-                    64,
-                    0,
-                    0
-                ],
-                [
-                    0,
-                    3,
-                    0,
-                    0,
-                    0,
-                    41,
-                    14
-                ],
-                [
-                    0,
-                    0,
-                    14,
-                    3,
-                    0,
-                    6,
-                    35
-                ]
-            ]
-        },
-        "random_forest": {
-            "accuracy": 0.7706855791962175,
-            "precision": 0.7800709382529791,
-            "recall": 0.7706855791962175,
-            "f1_score": 0.7662684054230297,
-            "roc_auc": 0.9552527310017258,
-            "confusion_matrix": [
-                [
-                    52,
-                    1,
-                    0,
-                    0,
-                    0,
-                    1,
-                    0
-                ],
-                [
-                    5,
-                    37,
-                    0,
-                    0,
-                    0,
-                    14,
-                    2
-                ],
-                [
-                    0,
-                    2,
-                    41,
-                    11,
-                    0,
-                    1,
-                    15
-                ],
-                [
-                    0,
-                    0,
-                    0,
-                    59,
-                    0,
-                    0,
-                    1
-                ],
-                [
-                    0,
-                    0,
-                    0,
-                    1,
-                    64,
-                    0,
-                    0
-                ],
-                [
-                    3,
-                    7,
-                    0,
-                    0,
-                    0,
-                    30,
-                    18
-                ],
-                [
-                    1,
-                    1,
-                    8,
-                    3,
-                    0,
-                    2,
-                    43
-                ]
-            ]
-        }
-    },
-    "saved_models": {
-        "decision_tree": "models/obesity/decision_tree.joblib",
-        "random_forest": "models/obesity/random_forest.joblib"
-    },
     "classes": [
         "Insufficient_Weight",
         "Normal_Weight",
@@ -185,5 +27,358 @@
         "Obesity_Type_III",
         "Overweight_Level_I",
         "Overweight_Level_II"
-    ]
+    ],
+    "evaluation": {
+        "logistic_regression": {
+            "accuracy": 0.9067,
+            "balanced_accuracy": 0.9046,
+            "precision": 0.909,
+            "recall": 0.9067,
+            "specificity": null,
+            "f1_score": 0.9055,
+            "roc_auc": 0.9883,
+            "pr_auc": null,
+            "cv_f1_mean": 0.8811,
+            "confusion_matrix": [
+                [
+                    53,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    8,
+                    43,
+                    0,
+                    0,
+                    0,
+                    6,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    65,
+                    2,
+                    1,
+                    0,
+                    2
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    60,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    1,
+                    64,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    3,
+                    0,
+                    0,
+                    0,
+                    47,
+                    5
+                ],
+                [
+                    0,
+                    0,
+                    4,
+                    0,
+                    0,
+                    7,
+                    47
+                ]
+            ]
+        },
+        "decision_tree": {
+            "accuracy": 0.7799,
+            "balanced_accuracy": 0.7804,
+            "precision": 0.7984,
+            "recall": 0.7799,
+            "specificity": null,
+            "f1_score": 0.7804,
+            "roc_auc": 0.9534,
+            "pr_auc": null,
+            "cv_f1_mean": 0.7604,
+            "confusion_matrix": [
+                [
+                    51,
+                    2,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    4,
+                    37,
+                    0,
+                    0,
+                    0,
+                    12,
+                    4
+                ],
+                [
+                    0,
+                    0,
+                    43,
+                    8,
+                    0,
+                    2,
+                    17
+                ],
+                [
+                    0,
+                    0,
+                    2,
+                    58,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    1,
+                    0,
+                    64,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    4,
+                    0,
+                    0,
+                    0,
+                    29,
+                    22
+                ],
+                [
+                    0,
+                    0,
+                    7,
+                    2,
+                    0,
+                    5,
+                    44
+                ]
+            ]
+        },
+        "random_forest": {
+            "accuracy": 0.8517,
+            "balanced_accuracy": 0.85,
+            "precision": 0.8534,
+            "recall": 0.8517,
+            "specificity": null,
+            "f1_score": 0.851,
+            "roc_auc": 0.9758,
+            "pr_auc": null,
+            "cv_f1_mean": 0.8392,
+            "confusion_matrix": [
+                [
+                    52,
+                    1,
+                    0,
+                    0,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    4,
+                    36,
+                    0,
+                    0,
+                    0,
+                    13,
+                    4
+                ],
+                [
+                    0,
+                    2,
+                    58,
+                    3,
+                    0,
+                    0,
+                    7
+                ],
+                [
+                    0,
+                    0,
+                    0,
+                    60,
+                    0,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    0,
+                    1,
+                    0,
+                    64,
+                    0,
+                    0
+                ],
+                [
+                    0,
+                    8,
+                    0,
+                    0,
+                    0,
+                    44,
+                    3
+                ],
+                [
+                    0,
+                    5,
+                    3,
+                    1,
+                    0,
+                    7,
+                    42
+                ]
+            ]
+        }
+    },
+    "saved_models": {
+        "logistic_regression": "models/obesity/logistic_regression.joblib",
+        "decision_tree": "models/obesity/decision_tree.joblib",
+        "random_forest": "models/obesity/random_forest.joblib"
+    },
+    "feature_importance": {
+        "logistic_regression": [
+            [
+                "Weight",
+                0.4681
+            ],
+            [
+                "Height",
+                0.1362
+            ],
+            [
+                "Gender_Male",
+                0.0586
+            ],
+            [
+                "Gender_Female",
+                0.058
+            ],
+            [
+                "MTRANS_Public_Transportation",
+                0.0387
+            ],
+            [
+                "Age",
+                0.0354
+            ],
+            [
+                "MTRANS_Automobile",
+                0.0352
+            ],
+            [
+                "family_history_with_overweight_yes",
+                0.0297
+            ]
+        ],
+        "decision_tree": [
+            [
+                "Weight",
+                0.5714
+            ],
+            [
+                "Gender_Male",
+                0.2374
+            ],
+            [
+                "Height",
+                0.1465
+            ],
+            [
+                "Age",
+                0.0447
+            ],
+            [
+                "Gender_Female",
+                0.0
+            ],
+            [
+                "family_history_with_overweight_no",
+                0.0
+            ],
+            [
+                "family_history_with_overweight_yes",
+                0.0
+            ],
+            [
+                "FAVC_no",
+                0.0
+            ]
+        ],
+        "random_forest": [
+            [
+                "Weight",
+                0.4545
+            ],
+            [
+                "Age",
+                0.1196
+            ],
+            [
+                "Height",
+                0.1032
+            ],
+            [
+                "Gender_Male",
+                0.0724
+            ],
+            [
+                "Gender_Female",
+                0.0693
+            ],
+            [
+                "family_history_with_overweight_yes",
+                0.0458
+            ],
+            [
+                "family_history_with_overweight_no",
+                0.0441
+            ],
+            [
+                "MTRANS_Automobile",
+                0.0259
+            ]
+        ]
+    },
+    "dataset_info": {
+        "total_samples": 2087,
+        "train_samples": 1669,
+        "test_samples": 418,
+        "class_distribution": {
+            "2": 351,
+            "4": 324,
+            "3": 297,
+            "6": 290,
+            "1": 282,
+            "5": 276,
+            "0": 267
+        }
+    }
 }
