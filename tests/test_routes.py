@@ -28,7 +28,7 @@ def test_about_page(client):
     """Test if about page loads successfully."""
     response = client.get('/about')
     assert response.status_code == 200
-    assert b"Methodology" in response.data
+    assert b"HealthAI Analytics" in response.data
 
 def test_prediction_pages(client):
     """Test that all 4 condition prediction pages render."""

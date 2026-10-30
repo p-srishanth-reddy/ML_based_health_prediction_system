@@ -1,80 +1,24 @@
 {% extends "base.html" %}
 
-{% block title %}Methodology & Documentation - HealthAI Analytics{% endblock %}
+{% block title %}About - HealthAI Analytics{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center">
-    <div class="col-lg-9">
-        <div class="card shadow-sm rounded-4 p-4 p-md-5 border">
-            <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-primary-subtle text-primary small fw-semibold mb-3 align-self-start">
-                <i class="bi bi-journal-medical"></i> Project Documentation
-            </div>
-            <h2 class="text-navy fw-bold mb-3">AI-Based Early Prediction of Health Diseases</h2>
-            <p class="lead text-muted">
-                An academic clinical analytics demonstration illustrating machine learning pipelines for condition-specific risk screening, model explainability, and comparative evaluation.
-            </p>
-
-            <hr class="my-4">
-
-            <h5 class="fw-bold text-navy mb-3"><i class="bi bi-diagram-3-fill text-primary me-2"></i>Condition-Specific Architecture</h5>
-            <p class="text-secondary">
-                Many naive healthcare demonstrations attempt to force disparate health conditions into a single generic input form. In contrast, this project maintains <strong>four isolated, condition-specific modules</strong>, each with its own independent clinical dataset, target label definition, validated schema, preprocessing pipeline, and model artifacts:
-            </p>
-            <div class="row g-3 mb-4">
-                <div class="col-md-6">
-                    <div class="p-3 bg-light rounded-3 border h-100">
-                        <h6 class="fw-bold text-navy mb-1"><i class="bi bi-heart me-1 text-danger"></i>Hypertension / Blood Pressure</h6>
-                        <p class="small text-muted mb-0">Evaluates physiological and familial risk using age, BMI, hemoglobin concentration, genetic pedigree coefficient, and chronic renal history.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="p-3 bg-light rounded-3 border h-100">
-                        <h6 class="fw-bold text-navy mb-1"><i class="bi bi-droplet-half me-1 text-primary"></i>Diabetes / Blood Sugar</h6>
-                        <p class="small text-muted mb-0">Screens for Type-2 diabetes risk based on fasting glucose concentration, glycated hemoglobin (HbA1c), patient age, and body mass index.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="p-3 bg-light rounded-3 border h-100">
-                        <h6 class="fw-bold text-navy mb-1"><i class="bi bi-activity me-1 text-danger"></i>Anemia Risk</h6>
-                        <p class="small text-muted mb-0">Hematology screening based on biological sex, hemoglobin levels, and red cell volume indices (MCH, MCHC, MCV).</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="p-3 bg-light rounded-3 border h-100">
-                        <h6 class="fw-bold text-navy mb-1"><i class="bi bi-person-arms-up me-1 text-success"></i>Obesity & Body Mass</h6>
-                        <p class="small text-muted mb-0">Classifies 7 distinct body mass tiers (Underweight, Normal, Overweight Levels I-II, Obesity Types I-III) based on anthropometrics and dietary habits.</p>
-                    </div>
-                </div>
-            </div>
-
-            <h5 class="fw-bold text-navy mb-3"><i class="bi bi-shield-check text-primary me-2"></i>Data Leakage Prevention & Rigorous Validation</h5>
-            <p class="text-secondary small mb-2">
-                Previous iterations of the anemia and diabetes datasets contained duplicated records that caused severe test-set leakage when randomly partitioned, inflating accuracy to fictitious 100% metrics. In our improved pipeline:
-            </p>
-            <ul class="text-secondary small">
-                <li><strong>Dataset Deduplication:</strong> Duplicate rows are purged before splitting, guaranteeing zero identical sample overlap between training and testing.</li>
-                <li><strong>Stratified Holdout Split:</strong> A clean 20% test partition is set aside with class proportions preserved.</li>
-                <li><strong>5-Fold Stratified Cross-Validation:</strong> Preprocessing pipelines (imputation, standard scaling, and one-hot encoding) are fitted strictly within folds to prevent feature leakage.</li>
-                <li><strong>Comprehensive Metric Reporting:</strong> In addition to accuracy, models are evaluated on Balanced Accuracy, Precision, Recall/Sensitivity, Specificity, F1-Score, and ROC-AUC / PR-AUC.</li>
-            </ul>
-
-            <h5 class="fw-bold text-navy mb-3 mt-4"><i class="bi bi-lightbulb-fill text-warning me-2"></i>Explainability: Feature Association vs. Causation</h5>
-            <p class="text-secondary small">
-                When screening a patient, the system extracts global feature importance weights and computes local patient-level deviations relative to clinical reference baselines.
-                Importantly, <strong>statistical association is NOT biological causation</strong>: while elevated glucose strongly predicts diabetes risk in dataset records, the model does not assert direct medical causation.
-            </p>
-
-            <div class="alert alert-warning border-0 rounded-4 mt-4 p-4">
-                <div class="d-flex gap-3">
-                    <i class="bi bi-exclamation-triangle-fill text-warning fs-3 flex-shrink-0"></i>
-                    <div>
-                        <h6 class="fw-bold mb-1">Academic Decision Support Disclaimer</h6>
-                        <p class="small mb-0 text-secondary">
-                            This application is an educational engineering demonstration. It is <strong>NOT a certified diagnostic medical device</strong> and should never be used as a substitute for professional medical consultation, diagnosis, or treatment. Always consult a licensed healthcare professional with any questions regarding personal medical conditions.
-                        </p>
-                    </div>
-                </div>
-            </div>
+    <div class="col-lg-8 text-center py-5">
+        <div class="d-inline-flex align-items-center gap-2 px-3 py-1 rounded-pill bg-primary-subtle text-primary small fw-semibold mb-3">
+            <i class="bi bi-shield-check"></i> Clinical Analytics Prototype
+        </div>
+        <h3 class="fw-bold text-navy mb-3">HealthAI Analytics</h3>
+        <p class="text-muted mx-auto" style="max-width: 600px;">
+            Clinical machine learning screening platform supporting condition-specific risk analysis across hematology, metabolic, cardiovascular, and body mass indicators.
+        </p>
+        <div class="mt-4 d-flex justify-content-center gap-3">
+            <a href="/" class="btn btn-primary rounded-pill px-4">
+                <i class="bi bi-heart-pulse me-2"></i>Screening Modules
+            </a>
+            <a href="/evaluation" class="btn btn-outline-secondary rounded-pill px-4">
+                <i class="bi bi-bar-chart-line me-2"></i>Model Evaluation
+            </a>
         </div>
     </div>
 </div>

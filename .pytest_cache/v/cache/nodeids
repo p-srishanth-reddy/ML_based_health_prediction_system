@@ -1,4 +1,7 @@
 [
+  "tests/test_ml_pipeline.py::test_anemia_clinical_predictions",
+  "tests/test_ml_pipeline.py::test_anemia_dataset_audit_and_leakage",
+  "tests/test_ml_pipeline.py::test_anemia_evaluation_metadata_and_generalization_gap",
   "tests/test_ml_pipeline.py::test_data_loader_categorical_mapping",
   "tests/test_ml_pipeline.py::test_data_loader_deduplication",
   "tests/test_ml_pipeline.py::test_predictor_multi_model_structure",

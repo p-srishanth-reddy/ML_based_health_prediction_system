@@ -50,9 +50,9 @@ class DataLoader:
 
             # Standardize column mappings and categorical representations
             if module_id == 'anemia':
-                # Anemia dataset: 0 = Male, 1 = Female
+                # Anemia dataset: 0 = Female (WHO cutoff 12.0 g/dL), 1 = Male (WHO cutoff 13.5 g/dL)
                 if 'Gender' in df.columns and df['Gender'].dtype != 'object':
-                    df['Gender'] = df['Gender'].map({0: 'Male', 1: 'Female'}).fillna('Male')
+                    df['Gender'] = df['Gender'].map({0: 'Female', 1: 'Male'}).fillna('Female')
 
             elif module_id == 'blood_pressure':
                 # Blood pressure dataset: Sex 0 = Male, 1 = Female
