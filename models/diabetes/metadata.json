@@ -1,6 +1,6 @@
 {
     "module_id": "diabetes",
-    "primary_model": "logistic_regression",
+    "primary_model": "decision_tree",
     "target_mapping": {
         "0": 0,
         "1": 1
@@ -17,67 +17,106 @@
     ],
     "evaluation": {
         "logistic_regression": {
-            "accuracy": 0.8773,
-            "balanced_accuracy": 0.8754,
-            "precision": 0.9353,
-            "recall": 0.8773,
-            "specificity": 0.8777,
-            "f1_score": 0.896,
-            "roc_auc": 0.958,
-            "pr_auc": 0.8117,
-            "cv_f1_mean": 0.898,
+            "train_accuracy": 0.8797,
+            "train_f1": 0.8963,
+            "cv_accuracy_mean": 0.8797,
+            "cv_accuracy_std": 0.0015,
+            "cv_f1_mean": 0.8963,
+            "cv_f1_std": 0.0012,
+            "cv_balanced_accuracy": 0.8781,
+            "cv_roc_auc_mean": 0.9591,
+            "accuracy": 0.8785,
+            "balanced_accuracy": 0.8784,
+            "precision": 0.9323,
+            "recall": 0.8785,
+            "specificity": 0.8786,
+            "f1_score": 0.8955,
+            "roc_auc": 0.9599,
+            "pr_auc": 0.8171,
+            "generalization_gap": 0.0011,
             "confusion_matrix": [
                 [
-                    15389,
-                    2145
+                    13639,
+                    1885
                 ],
                 [
-                    215,
-                    1481
+                    202,
+                    1458
                 ]
-            ]
+            ],
+            "hyperparameters": {
+                "C": 1.0,
+                "solver": "lbfgs"
+            }
         },
         "decision_tree": {
-            "accuracy": 0.757,
-            "balanced_accuracy": 0.8436,
-            "precision": 0.9286,
-            "recall": 0.757,
-            "specificity": 0.7385,
-            "f1_score": 0.8084,
-            "roc_auc": 0.9427,
-            "pr_auc": 0.7556,
-            "cv_f1_mean": 0.8269,
+            "train_accuracy": 0.8859,
+            "train_f1": 0.9016,
+            "cv_accuracy_mean": 0.8938,
+            "cv_accuracy_std": 0.0075,
+            "cv_f1_mean": 0.9075,
+            "cv_f1_std": 0.0056,
+            "cv_balanced_accuracy": 0.8936,
+            "cv_roc_auc_mean": 0.9676,
+            "accuracy": 0.8888,
+            "balanced_accuracy": 0.8954,
+            "precision": 0.9376,
+            "recall": 0.8888,
+            "specificity": 0.8872,
+            "f1_score": 0.9038,
+            "roc_auc": 0.9678,
+            "pr_auc": 0.8043,
+            "generalization_gap": -0.0029,
             "confusion_matrix": [
                 [
-                    12948,
-                    4586
+                    13773,
+                    1751
                 ],
                 [
-                    87,
-                    1609
+                    160,
+                    1500
                 ]
-            ]
+            ],
+            "hyperparameters": {
+                "ccp_alpha": 0.0,
+                "max_depth": 6,
+                "min_samples_leaf": 5
+            }
         },
         "random_forest": {
-            "accuracy": 0.8678,
-            "balanced_accuracy": 0.8942,
-            "precision": 0.9391,
-            "recall": 0.8678,
-            "specificity": 0.8621,
-            "f1_score": 0.8898,
-            "roc_auc": 0.9722,
-            "pr_auc": 0.8669,
-            "cv_f1_mean": 0.8951,
+            "train_accuracy": 0.879,
+            "train_f1": 0.8969,
+            "cv_accuracy_mean": 0.88,
+            "cv_accuracy_std": 0.0018,
+            "cv_f1_mean": 0.8974,
+            "cv_f1_std": 0.0014,
+            "cv_balanced_accuracy": 0.8989,
+            "cv_roc_auc_mean": 0.9735,
+            "accuracy": 0.8796,
+            "balanced_accuracy": 0.9011,
+            "precision": 0.9381,
+            "recall": 0.8796,
+            "specificity": 0.8745,
+            "f1_score": 0.8972,
+            "roc_auc": 0.9741,
+            "pr_auc": 0.8736,
+            "generalization_gap": -0.0006,
             "confusion_matrix": [
                 [
-                    15116,
-                    2418
+                    13575,
+                    1949
                 ],
                 [
-                    125,
-                    1571
+                    120,
+                    1540
                 ]
-            ]
+            ],
+            "hyperparameters": {
+                "max_depth": 6,
+                "max_features": "sqrt",
+                "min_samples_leaf": 4,
+                "n_estimators": 50
+            }
         }
     },
     "saved_models": {
@@ -89,65 +128,166 @@
         "logistic_regression": [
             [
                 "HbA1c_level",
-                0.4152
+                0.4198
             ],
             [
                 "blood_glucose_level",
-                0.2327
+                0.2348
             ],
             [
                 "age",
-                0.2327
+                0.2316
             ],
             [
                 "bmi",
-                0.1194
+                0.1138
             ]
         ],
         "decision_tree": [
             [
                 "HbA1c_level",
-                0.5688
+                0.5178
             ],
             [
                 "blood_glucose_level",
-                0.3165
+                0.36
             ],
             [
                 "age",
-                0.1147
+                0.1089
             ],
             [
                 "bmi",
-                0.0
+                0.0133
             ]
         ],
         "random_forest": [
             [
                 "HbA1c_level",
-                0.4914
+                0.4808
             ],
             [
                 "blood_glucose_level",
-                0.3241
+                0.3422
             ],
             [
                 "age",
-                0.1515
+                0.1513
             ],
             [
                 "bmi",
-                0.033
+                0.0258
             ]
         ]
     },
+    "permutation_importance": {
+        "logistic_regression": [
+            [
+                "HbA1c_level",
+                0.0579
+            ],
+            [
+                "blood_glucose_level",
+                0.0341
+            ],
+            [
+                "age",
+                0.0086
+            ],
+            [
+                "bmi",
+                -0.0024
+            ]
+        ],
+        "decision_tree": [
+            [
+                "HbA1c_level",
+                0.0629
+            ],
+            [
+                "blood_glucose_level",
+                0.0487
+            ],
+            [
+                "age",
+                -0.0005
+            ],
+            [
+                "bmi",
+                -0.0076
+            ]
+        ],
+        "random_forest": [
+            [
+                "HbA1c_level",
+                0.0611
+            ],
+            [
+                "blood_glucose_level",
+                0.0484
+            ],
+            [
+                "age",
+                0.0052
+            ],
+            [
+                "bmi",
+                -0.0097
+            ]
+        ]
+    },
+    "shap_importance": {
+        "decision_tree": [
+            [
+                "HbA1c_level",
+                0.455
+            ],
+            [
+                "blood_glucose_level",
+                0.2928
+            ],
+            [
+                "age",
+                0.2022
+            ],
+            [
+                "bmi",
+                0.05
+            ]
+        ],
+        "random_forest": [
+            [
+                "HbA1c_level",
+                0.4142
+            ],
+            [
+                "blood_glucose_level",
+                0.2939
+            ],
+            [
+                "age",
+                0.229
+            ],
+            [
+                "bmi",
+                0.0628
+            ]
+        ]
+    },
+    "clinical_analysis": {
+        "target_leakage_identified": false,
+        "clinical_explanation": "Standard clinical screening model trained with 5-fold cross-validation on diabetes cohort.",
+        "duplicate_records_audit": "Deduplicated prior to train-test splitting.",
+        "generalization_advisory": "Evaluated on held-out test split.",
+        "recommended_model_justification": "Selected 'Decision Tree' based on 5-fold cross-validated F1 (0.9075)."
+    },
     "dataset_info": {
-        "total_samples": 96146,
-        "train_samples": 76916,
-        "test_samples": 19230,
+        "total_samples": 85916,
+        "train_samples": 68732,
+        "test_samples": 17184,
         "class_distribution": {
-            "0": 87664,
-            "1": 8482
+            "0": 77618,
+            "1": 8298
         }
     }
 }

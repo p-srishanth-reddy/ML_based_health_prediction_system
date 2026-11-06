@@ -127,6 +127,8 @@ def train_module(module_id):
     results = {}
     saved_models = {}
     feature_importances = {}
+    permutation_importances = {}
+    shap_importances = {}
     best_hyperparameters = {}
     best_model_name = 'random_forest'
     best_cv_f1 = -1.0
@@ -230,6 +232,32 @@ def train_module(module_id):
 
         feature_importances[name] = sorted(fi_dict.items(), key=lambda x: x[1], reverse=True)[:8]
 
+        # 1. Permutation Importance Evaluation on held-out test partition
+        from sklearn.inspection import permutation_importance
+        perm_res = permutation_importance(best_pipeline, X_test, y_test, n_repeats=30, random_state=42)
+        perm_dict = {feat: float(round(perm_res.importances_mean[idx], 4)) for idx, feat in enumerate(features)}
+        permutation_importances[name] = sorted(perm_dict.items(), key=lambda x: x[1], reverse=True)
+
+        # 2. SHAP Attribution Evaluation on held-out test partition
+        try:
+            import shap
+            preprocessor_step = best_pipeline.named_steps['preprocessor']
+            X_test_trans = preprocessor_step.transform(X_test)
+            if hasattr(clf_step, 'feature_importances_'):
+                explainer = shap.TreeExplainer(clf_step)
+                sv = explainer.shap_values(X_test_trans)
+                if isinstance(sv, list):
+                    sv = sv[1] if len(sv) > 1 else sv[0]
+                elif isinstance(sv, np.ndarray) and sv.ndim == 3:
+                    sv = sv[:, :, 1]
+                mean_abs_shap = np.mean(np.abs(sv), axis=0)
+                norm_shap = mean_abs_shap / (np.sum(mean_abs_shap) + 1e-9)
+                shap_dict = {feat: float(round(s, 4)) for feat, s in zip(clean_feature_names, norm_shap)}
+                shap_importances[name] = sorted(shap_dict.items(), key=lambda x: x[1], reverse=True)[:8]
+        except Exception as e:
+            logger.warning(f"SHAP calculation skipped for {name}: {e}")
+
+
         results[name] = {
             'train_accuracy': round(train_acc, 4),
             'train_f1': round(train_f1, 4),
@@ -311,6 +339,8 @@ def train_module(module_id):
         'evaluation': results,
         'saved_models': saved_models,
         'feature_importance': feature_importances,
+        'permutation_importance': permutation_importances,
+        'shap_importance': shap_importances,
         'clinical_analysis': clinical_analysis,
         'dataset_info': {
             'total_samples': len(df),

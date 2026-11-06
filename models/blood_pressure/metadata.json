@@ -1,6 +1,6 @@
 {
     "module_id": "blood_pressure",
-    "primary_model": "random_forest",
+    "primary_model": "decision_tree",
     "target_mapping": {
         "0": 0,
         "1": 1
@@ -19,6 +19,14 @@
     ],
     "evaluation": {
         "logistic_regression": {
+            "train_accuracy": 0.7269,
+            "train_f1": 0.7268,
+            "cv_accuracy_mean": 0.725,
+            "cv_accuracy_std": 0.0131,
+            "cv_f1_mean": 0.7248,
+            "cv_f1_std": 0.0132,
+            "cv_balanced_accuracy": 0.7252,
+            "cv_roc_auc_mean": 0.7488,
             "accuracy": 0.7125,
             "balanced_accuracy": 0.7129,
             "precision": 0.7137,
@@ -27,7 +35,7 @@
             "f1_score": 0.7123,
             "roc_auc": 0.731,
             "pr_auc": 0.7341,
-            "cv_f1_mean": 0.7248,
+            "generalization_gap": 0.0144,
             "confusion_matrix": [
                 [
                     139,
@@ -37,49 +45,80 @@
                     51,
                     146
                 ]
-            ]
+            ],
+            "hyperparameters": {
+                "C": 1.0,
+                "solver": "lbfgs"
+            }
         },
         "decision_tree": {
-            "accuracy": 0.82,
-            "balanced_accuracy": 0.818,
-            "precision": 0.8426,
-            "recall": 0.82,
-            "specificity": 0.9507,
-            "f1_score": 0.8165,
-            "roc_auc": 0.8701,
-            "pr_auc": 0.8503,
-            "cv_f1_mean": 0.8239,
+            "train_accuracy": 0.8975,
+            "train_f1": 0.8975,
+            "cv_accuracy_mean": 0.8762,
+            "cv_accuracy_std": 0.0081,
+            "cv_f1_mean": 0.8761,
+            "cv_f1_std": 0.0081,
+            "cv_balanced_accuracy": 0.8763,
+            "cv_roc_auc_mean": 0.9253,
+            "accuracy": 0.865,
+            "balanced_accuracy": 0.8645,
+            "precision": 0.8662,
+            "recall": 0.865,
+            "specificity": 0.8966,
+            "f1_score": 0.8648,
+            "roc_auc": 0.9105,
+            "pr_auc": 0.9008,
+            "generalization_gap": 0.0325,
             "confusion_matrix": [
                 [
-                    193,
-                    10
+                    182,
+                    21
                 ],
                 [
-                    62,
-                    135
+                    33,
+                    164
                 ]
-            ]
+            ],
+            "hyperparameters": {
+                "ccp_alpha": 0.0,
+                "max_depth": 6,
+                "min_samples_leaf": 10
+            }
         },
         "random_forest": {
-            "accuracy": 0.8575,
-            "balanced_accuracy": 0.8576,
-            "precision": 0.8576,
-            "recall": 0.8575,
-            "specificity": 0.8522,
-            "f1_score": 0.8575,
-            "roc_auc": 0.9228,
-            "pr_auc": 0.9246,
-            "cv_f1_mean": 0.8586,
+            "train_accuracy": 0.8919,
+            "train_f1": 0.8919,
+            "cv_accuracy_mean": 0.8675,
+            "cv_accuracy_std": 0.0118,
+            "cv_f1_mean": 0.8674,
+            "cv_f1_std": 0.0118,
+            "cv_balanced_accuracy": 0.8677,
+            "cv_roc_auc_mean": 0.93,
+            "accuracy": 0.87,
+            "balanced_accuracy": 0.8694,
+            "precision": 0.8717,
+            "recall": 0.87,
+            "specificity": 0.9064,
+            "f1_score": 0.8698,
+            "roc_auc": 0.9204,
+            "pr_auc": 0.9201,
+            "generalization_gap": 0.0219,
             "confusion_matrix": [
                 [
-                    173,
-                    30
+                    184,
+                    19
                 ],
                 [
-                    27,
-                    170
+                    33,
+                    164
                 ]
-            ]
+            ],
+            "hyperparameters": {
+                "max_depth": 6,
+                "max_features": "sqrt",
+                "min_samples_leaf": 4,
+                "n_estimators": 100
+            }
         }
     },
     "saved_models": {
@@ -125,27 +164,177 @@
         "decision_tree": [
             [
                 "Genetic_Pedigree_Coefficient",
-                0.3633
-            ],
-            [
-                "Chronic_kidney_disease_0",
-                0.3465
+                0.3682
             ],
             [
                 "Level_of_Hemoglobin",
-                0.2828
+                0.3478
             ],
             [
-                "Age",
-                0.0047
-            ],
-            [
-                "BMI",
-                0.0028
+                "Chronic_kidney_disease_0",
+                0.2679
             ],
             [
                 "Sex_Female",
+                0.0108
+            ],
+            [
+                "BMI",
+                0.003
+            ],
+            [
+                "Age",
+                0.0023
+            ],
+            [
+                "Sex_Male",
                 0.0
+            ],
+            [
+                "Chronic_kidney_disease_1",
+                0.0
+            ]
+        ],
+        "random_forest": [
+            [
+                "Level_of_Hemoglobin",
+                0.3123
+            ],
+            [
+                "Genetic_Pedigree_Coefficient",
+                0.3114
+            ],
+            [
+                "Chronic_kidney_disease_1",
+                0.154
+            ],
+            [
+                "Chronic_kidney_disease_0",
+                0.1348
+            ],
+            [
+                "Age",
+                0.0367
+            ],
+            [
+                "BMI",
+                0.0283
+            ],
+            [
+                "Sex_Female",
+                0.0127
+            ],
+            [
+                "Sex_Male",
+                0.0097
+            ]
+        ]
+    },
+    "permutation_importance": {
+        "logistic_regression": [
+            [
+                "Chronic_kidney_disease",
+                0.2038
+            ],
+            [
+                "Sex",
+                0.0137
+            ],
+            [
+                "Level_of_Hemoglobin",
+                0.0107
+            ],
+            [
+                "Genetic_Pedigree_Coefficient",
+                0.0013
+            ],
+            [
+                "Age",
+                0.0
+            ],
+            [
+                "BMI",
+                0.0
+            ]
+        ],
+        "decision_tree": [
+            [
+                "Genetic_Pedigree_Coefficient",
+                0.189
+            ],
+            [
+                "Level_of_Hemoglobin",
+                0.1772
+            ],
+            [
+                "Chronic_kidney_disease",
+                0.043
+            ],
+            [
+                "Age",
+                0.0
+            ],
+            [
+                "BMI",
+                0.0
+            ],
+            [
+                "Sex",
+                -0.0014
+            ]
+        ],
+        "random_forest": [
+            [
+                "Level_of_Hemoglobin",
+                0.1607
+            ],
+            [
+                "Genetic_Pedigree_Coefficient",
+                0.1592
+            ],
+            [
+                "Chronic_kidney_disease",
+                0.0844
+            ],
+            [
+                "Sex",
+                0.0239
+            ],
+            [
+                "BMI",
+                0.001
+            ],
+            [
+                "Age",
+                0.0001
+            ]
+        ]
+    },
+    "shap_importance": {
+        "decision_tree": [
+            [
+                "Genetic_Pedigree_Coefficient",
+                0.3651
+            ],
+            [
+                "Level_of_Hemoglobin",
+                0.3237
+            ],
+            [
+                "Chronic_kidney_disease_0",
+                0.2832
+            ],
+            [
+                "Sex_Female",
+                0.0168
+            ],
+            [
+                "BMI",
+                0.0071
+            ],
+            [
+                "Age",
+                0.0041
             ],
             [
                 "Sex_Male",
@@ -159,37 +348,44 @@
         "random_forest": [
             [
                 "Genetic_Pedigree_Coefficient",
-                0.3217
+                0.2661
             ],
             [
                 "Level_of_Hemoglobin",
-                0.2889
+                0.263
             ],
             [
                 "Chronic_kidney_disease_1",
-                0.1621
+                0.1932
             ],
             [
                 "Chronic_kidney_disease_0",
-                0.1341
-            ],
-            [
-                "Age",
-                0.0414
-            ],
-            [
-                "BMI",
-                0.0349
-            ],
-            [
-                "Sex_Male",
-                0.0102
+                0.1739
             ],
             [
                 "Sex_Female",
-                0.0067
+                0.0315
+            ],
+            [
+                "Age",
+                0.0274
+            ],
+            [
+                "Sex_Male",
+                0.027
+            ],
+            [
+                "BMI",
+                0.0179
             ]
         ]
+    },
+    "clinical_analysis": {
+        "target_leakage_identified": false,
+        "clinical_explanation": "Standard clinical screening model trained with 5-fold cross-validation on blood_pressure cohort.",
+        "duplicate_records_audit": "Deduplicated prior to train-test splitting.",
+        "generalization_advisory": "Evaluated on held-out test split.",
+        "recommended_model_justification": "Selected 'Decision Tree' based on 5-fold cross-validated F1 (0.8761)."
     },
     "dataset_info": {
         "total_samples": 2000,

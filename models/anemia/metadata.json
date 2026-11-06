@@ -88,11 +88,11 @@
         "random_forest": {
             "train_accuracy": 1.0,
             "train_f1": 1.0,
-            "cv_accuracy_mean": 0.9977,
-            "cv_accuracy_std": 0.0047,
-            "cv_f1_mean": 0.9977,
-            "cv_f1_std": 0.0046,
-            "cv_balanced_accuracy": 0.9978,
+            "cv_accuracy_mean": 1.0,
+            "cv_accuracy_std": 0.0,
+            "cv_f1_mean": 1.0,
+            "cv_f1_std": 0.0,
+            "cv_balanced_accuracy": 1.0,
             "cv_roc_auc_mean": 1.0,
             "accuracy": 1.0,
             "balanced_accuracy": 1.0,
@@ -117,7 +117,7 @@
                 "max_depth": 4,
                 "max_features": "sqrt",
                 "min_samples_leaf": 2,
-                "n_estimators": 100
+                "n_estimators": 50
             }
         }
     },
@@ -182,27 +182,149 @@
         "random_forest": [
             [
                 "Hemoglobin",
-                0.8385
+                0.8369
             ],
             [
                 "Gender_Female",
-                0.0528
-            ],
-            [
-                "MCV",
-                0.0331
+                0.0444
             ],
             [
                 "MCH",
-                0.0271
+                0.0376
             ],
             [
                 "Gender_Male",
-                0.0267
+                0.0375
+            ],
+            [
+                "MCV",
+                0.0245
             ],
             [
                 "MCHC",
-                0.0218
+                0.0191
+            ]
+        ]
+    },
+    "permutation_importance": {
+        "logistic_regression": [
+            [
+                "Hemoglobin",
+                0.4202
+            ],
+            [
+                "Gender",
+                0.1324
+            ],
+            [
+                "MCHC",
+                0.0
+            ],
+            [
+                "MCV",
+                0.0
+            ],
+            [
+                "MCH",
+                -0.0044
+            ]
+        ],
+        "decision_tree": [
+            [
+                "Hemoglobin",
+                0.4349
+            ],
+            [
+                "Gender",
+                0.1492
+            ],
+            [
+                "MCH",
+                0.0
+            ],
+            [
+                "MCHC",
+                0.0
+            ],
+            [
+                "MCV",
+                0.0
+            ]
+        ],
+        "random_forest": [
+            [
+                "Hemoglobin",
+                0.4349
+            ],
+            [
+                "Gender",
+                0.1492
+            ],
+            [
+                "MCH",
+                0.0
+            ],
+            [
+                "MCHC",
+                0.0
+            ],
+            [
+                "MCV",
+                0.0
+            ]
+        ]
+    },
+    "shap_importance": {
+        "decision_tree": [
+            [
+                "Hemoglobin",
+                0.7522
+            ],
+            [
+                "Gender_Male",
+                0.2478
+            ],
+            [
+                "MCH",
+                0.0
+            ],
+            [
+                "MCHC",
+                0.0
+            ],
+            [
+                "MCV",
+                0.0
+            ],
+            [
+                "Gender_Female",
+                0.0
+            ]
+        ],
+        "random_forest": [
+            [
+                "Hemoglobin",
+                0.7251
+            ],
+            [
+                "Gender_Female",
+                0.119
+            ],
+            [
+                "Gender_Male",
+                0.0971
+            ],
+            [
+                "MCV",
+                0.0239
+            ],
+            [
+                "MCH",
+                0.0231
+            ],
+            [
+                "MCHC",
+                0.0117
             ]
         ]
     },
@@ -213,7 +335,7 @@
         "clinical_explanation": "Under World Health Organization (WHO) clinical diagnostic guidelines, anemia is explicitly defined by sex-specific hemoglobin thresholds (< 12.0 g/dL in adult females and < 13.5 g/dL in adult males). Because the dataset ground-truth labels were generated using this deterministic definition, decision tree and random forest models achieve 100% test performance simply by locating those exact partition cuts.",
         "duplicate_records_audit": "The original dataset had 1,421 records with 887 exact duplicates (62.4% duplication rate). Deduplication to 534 unique records was enforced prior to stratified splitting to prevent cross-partition patient record leakage.",
         "generalization_advisory": "A 100% test accuracy on this synthetic cohort reflects rule memorization rather than infallible clinical generalization. In real-world patient populations, hemoglobin varies with altitude, hydration, pregnancy, smoking status, and assay variance. Uncalibrated tree probabilities should be treated as diagnostic rule checks, and regularized Logistic Regression is valuable for producing smooth, continuous risk gradients near boundary thresholds.",
-        "recommended_model_justification": "Selected 'Random Forest' based on 5-fold cross-validated F1 score (0.9977) on the isolated training set. Cost-complexity pruning (ccp_alpha) and leaf constraints were applied to prevent spurious branch memorization."
+        "recommended_model_justification": "Selected 'Random Forest' based on 5-fold cross-validated F1 score (1.0000) on the isolated training set. Cost-complexity pruning (ccp_alpha) and leaf constraints were applied to prevent spurious branch memorization."
     },
     "dataset_info": {
         "total_samples": 534,
