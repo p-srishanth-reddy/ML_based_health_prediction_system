@@ -525,7 +525,8 @@ function displayEvaluation(data) {
     if (topFeatures.length > 0) {
         fiContainer.innerHTML = topFeatures.map(([name, weight]) => {
             const cleanName = name.replace(/_/g, ' ');
-            const pct = Math.round(weight * 100);
+            const pctRaw = weight * 100;
+            const pct = Math.round(Math.max(5, Math.min(65, pctRaw)));
             return `
                 <div class="mb-3">
                     <div class="d-flex justify-content-between small fw-semibold text-navy mb-1">

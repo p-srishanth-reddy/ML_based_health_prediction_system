@@ -306,11 +306,11 @@
         "logistic_regression": [
             [
                 "Weight",
-                0.5362
+                0.5363
             ],
             [
                 "Height",
-                0.1563
+                0.1562
             ],
             [
                 "Gender_Female",
@@ -326,7 +326,7 @@
             ],
             [
                 "MTRANS_Public_Transportation",
-                0.0297
+                0.0296
             ],
             [
                 "family_history_with_overweight_yes",
@@ -410,11 +410,11 @@
         "logistic_regression": [
             [
                 "Weight",
-                0.7262
+                0.7261
             ],
             [
                 "Height",
-                0.3396
+                0.3397
             ],
             [
                 "Gender",
@@ -422,7 +422,7 @@
             ],
             [
                 "Age",
-                0.0462
+                0.0459
             ],
             [
                 "MTRANS",
